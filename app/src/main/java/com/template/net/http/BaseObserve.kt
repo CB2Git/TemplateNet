@@ -18,6 +18,10 @@ abstract class BaseObserve<T> : Observer<BaseResponse<T>> {
 
     }
 
+    /**
+     * 请求->onSuccess->onComplete
+     * 请求->onFail
+     */
     override fun onComplete() {}
 
     final override fun onSubscribe(d: @NonNull Disposable?) {}

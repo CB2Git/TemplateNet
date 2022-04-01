@@ -44,7 +44,12 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this@MainActivity, "请求失败了", Toast.LENGTH_SHORT).show()
                             e?.let {
                                 Log.e(TAG, "onFail: ", it)
-                            }
+                            } 
+                        }
+
+                        override fun onComplete() {
+                            super.onComplete()
+                            Toast.makeText(this@MainActivity, "完成了", Toast.LENGTH_SHORT).show()
                         }
                     })
         }
