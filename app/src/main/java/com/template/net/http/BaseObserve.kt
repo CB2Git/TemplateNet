@@ -14,7 +14,7 @@ abstract class BaseObserve<T> : Observer<BaseResponse<T>> {
 
     }
 
-    open fun onFail() {
+    open fun onFail(e: @NonNull Throwable?) {
 
     }
 
@@ -25,12 +25,12 @@ abstract class BaseObserve<T> : Observer<BaseResponse<T>> {
         if (tBaseResponse.isSuccess()) {
             onSuccess(tBaseResponse.data)
         } else {
-            onFail()
+            onFail(null)
         }
     }
 
     final override fun onError(e: @NonNull Throwable?) {
-        onFail()
+        onFail(e)
     }
 
 }

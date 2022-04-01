@@ -15,6 +15,6 @@ import retrofit2.http.Path
  **/
 interface WanAndroidApi {
 
-    @GET("https://www.wanandroid.com/article/list/{page}/json")
+    @GET("/article/list/{page}/json")
     fun getHomeList(@Path("page") page:String): Observable<BaseResponse<HomeChapterPageInfo>>
 }

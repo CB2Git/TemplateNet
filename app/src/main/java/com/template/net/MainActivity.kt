@@ -1,25 +1,23 @@
 package com.template.net
 
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.template.net.http.BaseObserve
-import com.template.net.http.BaseResponse
 import com.template.net.http.NetClientManager
 import com.template.net.http.api.WanAndroidApi
 import com.template.net.http.api.entity.HomeChapterPageInfo
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.functions.Consumer
+import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var requestNetButton: Button
+
+    private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +34,18 @@ class MainActivity : AppCompatActivity() {
 
                         override fun onSuccess(data: HomeChapterPageInfo?) {
                             super.onSuccess(data)
+                            data?.let {
+                                Log.i(TAG, "onSuccess: $it")
+                            }
                             Toast.makeText(this@MainActivity, "请求ok", Toast.LENGTH_SHORT).show()
                         }
 
-                        override fun onFail() {
+                        override fun onFail(e: @NonNull Throwable?) {
                             Toast.makeText(this@MainActivity, "请求失败了", Toast.LENGTH_SHORT).show()
+                            e?.let {
+                                Log.e(TAG, "onFail: ", it)
+                            }
                         }
-
-
                     })
         }
     }
